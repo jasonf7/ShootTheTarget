@@ -1,6 +1,6 @@
-var canvasElement = document.getElementById('canvas'), 
+var canvasElement = document.getElementById('canvas');
     
-c = canvasElement.getContext('2d');  
+var c = canvasElement.getContext('2d');  
 c.width = 0;
 c.height = 0;
 resizeCanvas();
