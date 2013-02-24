@@ -30,8 +30,8 @@ function clear(){
     c.fill();
 }
 
-canvasElement.addEventListener("touchstart",getPosition,false);
-canvasElement.addEventListener("mousedown",getPosition,false);
+window.addEventListener("touchstart",getPosition,false);
+window.addEventListener("mousedown",getPosition,false);
 
 var loop, w=50;
 
