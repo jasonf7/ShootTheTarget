@@ -46,14 +46,14 @@ function getPosition(event){
     var y = event.y; 
     x -= canvasElement.offsetLeft;
     y -= canvasElement.offsetTop;
-    loop = setInterval(function(){drawMouseCircle(x,y)}, 10);
+    loop = setInterval(function(){drawMouseCircle(x,y)}, 6);
 }
 
 function drawMouseCircle(x, y){
     clear();
     c.beginPath();    
-    c.lineWidth = w/7;
-    c.strokeStyle = 'Green';
+    c.lineWidth = w/10;
+    c.strokeStyle = '#7fb883';
     c.arc(x,y,w,0,2*Math.PI,true);
     c.stroke();
     w--;
