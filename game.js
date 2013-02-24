@@ -31,7 +31,7 @@ function clear(){
 }
 
 window.addEventListener("touchstart",getPosition,false);
-window.addEventListener("mousedown",getPosition,false);
+//window.addEventListener("mousedown",getPosition,false);
 
 var loop, w=50;
 
@@ -47,7 +47,7 @@ function getPosition(event){
     var y = event.y; 
     x -= canvasElement.offsetLeft;
     y -= canvasElement.offsetTop;
-    loop = setInterval(function(){drawMouseCircle(x,y)}, 7);
+    loop = setInterval(function(){drawMouseCircle(x,y)}, 10);
 }
 
 function drawMouseCircle(x, y){
