@@ -13,10 +13,10 @@ window.addEventListener('resize', resizeCanvas, false);
 function resizeCanvas() {
     var w = document.body.offsetWidth,
         h = document.body.offsetHeight;
-    c.canvas.width  = w;
-    c.canvas.height = h;
-    c.width = c.canvas.width;
-    c.height = c.canvas.height;
+    c.width  = w;
+    c.height = h;
+    canvasElement.width = w;
+    canvasElement.height = h;
     clear();    
 }
 
@@ -30,8 +30,7 @@ function clear(){
     c.fill();
 }
 
-window.addEventListener("touchstart",getPosition,false);
-//window.addEventListener("mousedown",getPosition,false);
+window.addEventListener("mousedown",getPosition,false);
 
 var loop, w=50;
 
