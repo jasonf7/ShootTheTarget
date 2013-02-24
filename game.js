@@ -1,5 +1,6 @@
 /**
  * A simple game where the user presses on randomly appearing food?
+ * BY: TEAM ALY
  *  February 2013
 */
 var canvasElement = document.getElementById('canvas');
