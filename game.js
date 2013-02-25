@@ -10,14 +10,13 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var target = [], targetCount = 0;
+var target = [], targetCount = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 
 var gameLoop = setInterval(function(){addTarget()}, 1000);
 var drawLoop = setInterval(function(){drawTargets()}, 6);
 
 function addTarget(){  
-    console.log(targetCount);
     var intialPoint = new point(Math.random()*c.width, Math.random()*c.height);
     var random = Math.round(Math.random()); //Random from 0 to 1
     if(random === 0) {
@@ -29,19 +28,23 @@ function addTarget(){
         clearInterval(gameLoop);
         clearInterval(drawLoop);
         drawTargets();
+        done = true;
         alert("Game Over!");
     }
 }
 
+var accuracy = 30;
+
 function checkPoint(x,y){
+    var hit = [];
     for(var i=0;i<targetCount;i++){
-      if(x<target[i][POINT].x+10 && x>target[i][POINT].x-10){
-        if(y<target[i][POINT].y+10 && y>target[i][POINT].y-10){
-            return i;
+      if(x<target[i][POINT].x+accuracy && x>target[i][POINT].x-accuracy){
+        if(y<target[i][POINT].y+accuracy && y>target[i][POINT].y-accuracy){
+            hit.push(i);
         }
       }  
     }
-    return -1;
+    return hit;
 }
 
 function point(x, y){
@@ -62,7 +65,7 @@ function resizeCanvas() {
 clear();
 
 function clear(){
-    c.fillStyle = 'LightGreen';  
+    c.fillStyle = '#E6E6E6';  
     c.rect(0, 0, c.width, c.height);  
     c.fill();
 }
@@ -78,9 +81,18 @@ function getPosition(event){
         mouseW = 50;
     }
     mouseX = event.x - canvasElement.offsetLeft;
-    mouseY = event.y - canvasElement.offsetTop;   
+    mouseY = event.y - canvasElement.offsetTop;     
     drawMouse = true;
-    drawTargets();
+    //remove hit stuff
+    var hit = checkPoint((mouseX-15),(mouseY-15));
+     for(var i=0;i < hit.length; i++){
+        target.splice(hit[i],1);
+        targetCount--;
+    }
+    
+    if(!done){
+        drawTargets();
+    }
 }
 
 function drawMouseCircle(x, y){
