@@ -10,13 +10,17 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
+var target = [], targetCount = 0, done = false;
+var POINT = 0,TYPE = 1, WIDTH = 2;
 var BLUE = 1, RED = 2;
 
 var target = [], targetCount = 0,targetID = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 
-var gameLoop = setInterval(function(){addTarget()}, 1000);
+var speed=1000;//the time interval between the appereance of each target
+var gameLoop = setInterval(function(){addTarget()}, speed);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
+var levelLoop = setInterval(function(){speed-=100;if(speed<500){speed=500}},20000)
 
 function addTarget(){  
     var intialPoint = new point(Math.random()*(c.width-30), Math.random()*(c.height-30));
@@ -88,7 +92,7 @@ function getPosition(event){
     drawMouse = true;
     //remove hit stuff
     var hit = checkPoint((mouseX-15),(mouseY-15));
-    for(var i=0;i < hit.length; i++){
+     for(var i=0;i < hit.length; i++){
         target.splice(getIndexFromID(hit[i]),1);
         targetCount--;
     }
@@ -157,12 +161,16 @@ function changeBar(){
     var randColor = Math.round(Math.random())+1;
     if(randColor == BLUE){
         c.fillStyle = '#8DCDEE'; 
+        c.beginPath();
+        c.rect(25, 100, 100, 100);
+        c.closePath();
+        c.fill(); 
     }
     else{
         c.fillStyle = '#E84343'; 
+        c.beginPath();
+        c.rect(25, 100, 100, 100);
+        c.closePath();
+        c.fill();
     }
-    c.beginPath();
-    c.rect(25, 100, 100, 100);
-    c.closePath();
-    c.fill(); 
 }
