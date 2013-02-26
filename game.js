@@ -20,7 +20,7 @@ var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 var speed=1000;//the time interval between the appereance of each target
 var gameLoop = setInterval(function(){addTarget()}, speed);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
-var levelLoop = setInterval(function(){speed-=100;if(speed<500){speed=500}},20000)
+var levelLoop = setInterval(function(){speed-=100;if(speed<500){speed=500}},5000)
 
 function addTarget(){  
     var intialPoint = new point(Math.random()*(c.width-30), Math.random()*(c.height-30));
