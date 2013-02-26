@@ -10,14 +10,12 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-<<<<<<< HEAD
 var target = [], targetCount = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 var BLUE = 1, RED = 2;
-=======
+
 var target = [], targetCount = 0,targetID = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
->>>>>>> b5f6b3ecb7d0e72c40ec10c6cf93d563a8cf98ab
 
 var gameLoop = setInterval(function(){addTarget()}, 1000);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
