@@ -12,6 +12,7 @@ window.addEventListener('resize', resizeCanvas, false);
 
 var target = [], targetCount = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
+var BLUE = 1, RED = 2;
 
 var gameLoop = setInterval(function(){addTarget()}, 500);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
@@ -91,7 +92,9 @@ function getPosition(event){
     }
     
     if(!done){
+        console.log("hi");
         drawTargets();
+        changeBar();
     }
 }
 
@@ -136,5 +139,22 @@ function drawTargets(){
         c.stroke();
         
     }
-    
+}
+
+function changeBar(){
+    var randColor = Math.round(Math.random())+1;
+    if(randColor == BLUE){
+        c.fillStyle = '#8DCDEE'; 
+        c.beginPath();
+        c.rect(25, 100, 100, 100);
+        c.closePath();
+        c.fill(); 
+    }
+    else{
+        c.fillStyle = '#E84343'; 
+        c.beginPath();
+        c.rect(25, 100, 100, 100);
+        c.closePath();
+        c.fill();
+    }
 }
