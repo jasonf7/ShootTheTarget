@@ -10,8 +10,6 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var target = [], targetCount = 0, done = false;
-var POINT = 0,TYPE = 1, WIDTH = 2;
 var BLUE = 1, RED = 2;
 
 var target = [], targetCount = 0,targetID = 0, done = false;
@@ -90,7 +88,7 @@ function getPosition(event){
     drawMouse = true;
     //remove hit stuff
     var hit = checkPoint((mouseX-15),(mouseY-15));
-     for(var i=0;i < hit.length; i++){
+    for(var i=0;i < hit.length; i++){
         target.splice(getIndexFromID(hit[i]),1);
         targetCount--;
     }
@@ -159,16 +157,12 @@ function changeBar(){
     var randColor = Math.round(Math.random())+1;
     if(randColor == BLUE){
         c.fillStyle = '#8DCDEE'; 
-        c.beginPath();
-        c.rect(25, 100, 100, 100);
-        c.closePath();
-        c.fill(); 
     }
     else{
         c.fillStyle = '#E84343'; 
-        c.beginPath();
-        c.rect(25, 100, 100, 100);
-        c.closePath();
-        c.fill();
     }
+    c.beginPath();
+    c.rect(25, 100, 100, 100);
+    c.closePath();
+    c.fill(); 
 }
