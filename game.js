@@ -13,8 +13,8 @@ window.addEventListener('resize', resizeCanvas, false);
 var target = [], targetCount = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 
-var gameLoop = setInterval(function(){addTarget()}, 1000);
-var drawLoop = setInterval(function(){drawTargets()}, 6);
+var gameLoop = setInterval(function(){addTarget()}, 500);
+var drawLoop = setInterval(function(){drawTargets()}, 5);
 
 function addTarget(){  
     var intialPoint = new point(Math.random()*c.width, Math.random()*c.height);
@@ -101,7 +101,7 @@ function drawMouseCircle(x, y){
     c.strokeStyle = '#7fb883';
     c.arc(x,y,mouseW,0,2*Math.PI,true);
     c.stroke();  
-    mouseW--;
+    mouseW-=2;
     if(mouseW === 0){
         drawMouse = false;
     }
