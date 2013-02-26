@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /**
  * A simple game where the user presses on randomly appearing food?
  * BY: TEAM ALY
@@ -174,4 +172,3 @@ function changeBar(){
         c.fill();
     }
 }
->>>>>>> 10dd23ea57e5914065edd0ad4fd67b1fd337267b
