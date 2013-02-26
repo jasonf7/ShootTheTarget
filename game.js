@@ -13,7 +13,7 @@ window.addEventListener('resize', resizeCanvas, false);
 var target = [], targetCount = 0,targetID, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 
-var gameLoop = setInterval(function(){addTarget()}, 500);
+var gameLoop = setInterval(function(){addTarget()}, 800);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
 
 function addTarget(){  
