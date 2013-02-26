@@ -10,9 +10,9 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var target = [], targetCount = 0, done = false;
-var POINT = 0,TYPE = 1, WIDTH = 2;
-var BLUE = 1, RED = 2;
+var target = [], targetCount = 0, done = false, targetRate = 1, score=0;
+var POINT = 0,TYPE = 1, WIDTH = 2; //Target parameters
+var BLUE = 1, RED = 2, ALL = -1; //Button types
 
 var target = [], targetCount = 0,targetID = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
@@ -20,27 +20,38 @@ var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 var speed=1000;//the time interval between the appereance of each target
 var gameLoop = setInterval(function(){addTarget()}, speed);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
-var levelLoop = setInterval(function(){speed-=100;if(speed<500){speed=500}},5000)
-
-function addTarget(){  
-    var intialPoint = new point(Math.random()*(c.width-30), Math.random()*(c.height-30));
-    var random = Math.round(Math.random()); //Random from 0 to 1
-    if(random === 0) {
-        random--; 
-    }
-    target.push([intialPoint,random,30,targetID]);
-    targetCount++;
-    targetID++;
-    if(targetCount == 15){
+var levelLoop = setInterval(function(){
+        speed-=100;
+        if(speed<400){
+            speed=400;
+        }
         clearInterval(gameLoop);
-        clearInterval(drawLoop);
-        drawTargets();
-        done = true;
-        alert("Game Over!");
+//        if(speed === 500){ //Faster at 800, 400
+//            targetRate++;
+//            if(targetRate>2){
+//                targetRate = 2;
+//            }
+//        }
+        gameLoop = setInterval(function(){addTarget()}, speed);
+    },1000);
+var endLoop = setTimeout(function(){drawEndScreen()},30000);
+/*
+* Adds a target to the array
+*/
+function addTarget(){  
+    for(var i=0; i<targetRate; i++){
+        var intialPoint = new point(Math.random()*(c.width-30), Math.random()*(c.height-30));
+        var random = Math.round(Math.random())+1; //Random from 1 to 2
+        target.push([intialPoint,random,30,targetID]);
+        targetCount++;
+        targetID++;
+    }
+    if(targetCount >= 30){        
+        drawEndScreen();
     }
 }
 
-var accuracy = 30;
+var accuracy = c.width*0.05;
 
 function checkPoint(x,y){
     var hit = [];
@@ -67,6 +78,9 @@ function resizeCanvas() {
     canvasElement.width = w;
     canvasElement.height = h;
     clear();    
+    if(done){
+        drawEndScreen();
+    }
 }
 
 clear();
@@ -88,19 +102,24 @@ function getPosition(event){
         mouseW = 50;
     }
     mouseX = event.x - canvasElement.offsetLeft;
-    mouseY = event.y - canvasElement.offsetTop;     
-    drawMouse = true;
-    //remove hit stuff
-    var hit = checkPoint((mouseX-15),(mouseY-15));
-     for(var i=0;i < hit.length; i++){
-        target.splice(getIndexFromID(hit[i]),1);
-        targetCount--;
-    }
+    mouseY = event.y - canvasElement.offsetTop; 
     
     if(!done){
-        console.log("hi");
+        drawMouse = true;
+        //remove hit stuff
+        var hit = checkPoint((mouseX-15),(mouseY-15));
+        for(var i=0;i < hit.length; i++){
+            if(getLeader() == ALL || target[getIndexFromID(hit[i])][TYPE]==getLeader()){
+                score++;
+            }else{
+                score-=5;
+            }
+            target.splice(getIndexFromID(hit[i]),1);
+            targetCount--;
+        }    
         drawTargets();
-        changeBar();
+    }else{
+        window.location.reload(false); 
     }
 }
 
@@ -129,6 +148,17 @@ function drawMouseCircle(x, y){
 
 function drawTargets(){
     clear();
+    //Draw the score in the background
+    c.fillStyle = '#c8c8c8';
+    c.shadowColor = '#a0a0a0';
+    c.shadowBlur = 1;
+    c.shadowOffsetX = -1;
+    c.shadowOffsetY = -1;
+    c.font = 'bold '+c.height*0.6+'px Calibri';
+    c.textAlign = 'center';
+    c.fillText(score+"",c.width/2,c.height/2+c.height*0.2);
+    c.shadowOffsetX = 0; c.shadowOffsetY=0;
+    
     if(drawMouse){
         drawMouseCircle(mouseX,mouseY);    
     }
@@ -157,6 +187,47 @@ function drawTargets(){
     }
 }
 
+function getLeader(){
+    var redCount=0, blueCount=0;
+    for(var i=0;i<targetCount;i++){
+        if(target[i][TYPE]==BLUE){
+            blueCount++;
+        }else{
+            redCount++;
+        }
+    }
+    if(blueCount > redCount){
+        return BLUE;
+    }else if(redCount > blueCount){
+        return RED;
+    }else{
+        return ALL;
+    }
+}
+
+function drawEndScreen(){    
+    clear();
+    clearInterval(gameLoop);
+    clearInterval(drawLoop);
+    clearInterval(levelLoop);
+    clearInterval(endLoop);
+    done = true;
+    c.fillStyle = '#c8c8c8';
+    c.shadowColor = '#a0a0a0';
+    c.shadowBlur = 1;
+    c.shadowOffsetX = -1;
+    c.shadowOffsetY = -1;
+    c.font = 'bold '+c.height*0.3+'px Calibri';
+    c.textAlign = 'center';
+    c.fillText("Game Over!",c.width/2,c.height/2);    
+    c.font = 'bold '+c.height*0.09+'px Calibri';   
+    //darker
+    c.fillText("Score: "+score+"  Click to restart!",c.width/2,c.height/2+c.height*0.2); 
+}
+
+/**
+ *  @deprecated
+ */
 function changeBar(){
     var randColor = Math.round(Math.random())+1;
     if(randColor == BLUE){
@@ -165,8 +236,7 @@ function changeBar(){
         c.rect(25, 100, 100, 100);
         c.closePath();
         c.fill(); 
-    }
-    else{
+    }else{
         c.fillStyle = '#E84343'; 
         c.beginPath();
         c.rect(25, 100, 100, 100);
