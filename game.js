@@ -10,11 +10,16 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
+<<<<<<< HEAD
 var target = [], targetCount = 0, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 var BLUE = 1, RED = 2;
+=======
+var target = [], targetCount = 0,targetID = 0, done = false;
+var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
+>>>>>>> b5f6b3ecb7d0e72c40ec10c6cf93d563a8cf98ab
 
-var gameLoop = setInterval(function(){addTarget()}, 500);
+var gameLoop = setInterval(function(){addTarget()}, 1000);
 var drawLoop = setInterval(function(){drawTargets()}, 5);
 
 function addTarget(){  
@@ -23,8 +28,9 @@ function addTarget(){
     if(random === 0) {
         random--; 
     }
-    target.push([intialPoint,random,30]);
+    target.push([intialPoint,random,30,targetID]);
     targetCount++;
+    targetID++;
     if(targetCount == 15){
         clearInterval(gameLoop);
         clearInterval(drawLoop);
@@ -41,7 +47,7 @@ function checkPoint(x,y){
     for(var i=0;i<targetCount;i++){
       if(x<target[i][POINT].x+accuracy && x>target[i][POINT].x-accuracy){
         if(y<target[i][POINT].y+accuracy && y>target[i][POINT].y-accuracy){
-            hit.push(i);
+            hit.push(target[i][ID]);
         }
       }  
     }
@@ -87,7 +93,7 @@ function getPosition(event){
     //remove hit stuff
     var hit = checkPoint((mouseX-15),(mouseY-15));
      for(var i=0;i < hit.length; i++){
-        target.splice(hit[i],1);
+        target.splice(getIndexFromID(hit[i]),1);
         targetCount--;
     }
     
@@ -96,6 +102,16 @@ function getPosition(event){
         drawTargets();
         changeBar();
     }
+}
+
+function getIndexFromID(id){
+    var index = 0;
+    for(var i=0;i<targetCount;i++){
+        if(target[i][ID] == id){
+            index = i;
+        }
+    }
+    return index;
 }
 
 function drawMouseCircle(x, y){
