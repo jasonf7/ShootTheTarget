@@ -17,7 +17,7 @@ var gameLoop = setInterval(function(){addTarget()}, 1000);
 var drawLoop = setInterval(function(){drawTargets()}, 6);
 
 function addTarget(){  
-    var intialPoint = new point(Math.random()*c.width, Math.random()*c.height);
+    var intialPoint = new point(Math.random()*(c.width-30), Math.random()*(c.height-30));
     var random = Math.round(Math.random()); //Random from 0 to 1
     if(random === 0) {
         random--; 
