@@ -10,7 +10,7 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var target = [], targetCount = 0, done = false;
+var target = [], targetCount = 0,targetID, done = false;
 var POINT = 0,TYPE = 1, WIDTH = 2;
 
 var gameLoop = setInterval(function(){addTarget()}, 500);
