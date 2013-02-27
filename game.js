@@ -78,6 +78,8 @@ window.addEventListener("mousedown",getPosition,false);
 //var mouseLoop,
 var mouseW=50, mouseX, mouseY, drawMouse = false;
 
+var numRed = 0, numBlue = 0, goodColor=target[0][TYPE];
+
 function getPosition(event){
     //If we're interrupted, cancel old circle!
     if(mouseW!=50){
@@ -94,9 +96,9 @@ function getPosition(event){
     }
     
     if(!done){
-        console.log("hi");
         drawTargets();
-        changeBar();
+        numRed = 0;
+        numBlue = 0;
     }
 }
 
@@ -153,16 +155,28 @@ function drawTargets(){
     }
 }
 
-function changeBar(){
-    var randColor = Math.round(Math.random())+1;
-    if(randColor == BLUE){
-        c.fillStyle = '#8DCDEE'; 
+function countColor(){
+    for(var i = 0; i < targetCount; i++){
+        if(target[i][TYPE] == 1){
+            numBlue++;
+        }
+        else{
+            numRed++;
+        }
     }
-    else{
-        c.fillStyle = '#E84343'; 
-    }
-    c.beginPath();
-    c.rect(25, 100, 100, 100);
-    c.closePath();
-    c.fill(); 
+    
 }
+
+//function changeBar(){
+//    var randColor = Math.round(Math.random())+1;
+//    if(randColor == BLUE){
+//        c.fillStyle = '#8DCDEE'; 
+//    }
+//    else{
+//        c.fillStyle = '#E84343'; 
+//    }
+//    c.beginPath();
+//    c.rect(25, 100, 100, 100);
+//    c.closePath();
+//    c.fill(); 
+//}
