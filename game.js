@@ -108,11 +108,6 @@ function getPosition(event){
     mouseY = event.y - canvasElement.offsetTop; 
     
     if(!done){
-<<<<<<< HEAD
-        drawTargets();
-        numRed = 0;
-        numBlue = 0;
-=======
         drawMouse = true;
         //remove hit stuff
         var hit = checkPoint((mouseX-15),(mouseY-15));
@@ -130,7 +125,6 @@ function getPosition(event){
     }else if(reloadable){
         clearInterval(canReload);
         window.location.reload(false);
->>>>>>> 20df6c563ff5597e48fd36414675d590967101bd
     }
 }
 
@@ -212,33 +206,6 @@ function drawTargets(){
     }
 }
 
-<<<<<<< HEAD
-function countColor(){
-    for(var i = 0; i < targetCount; i++){
-        if(target[i][TYPE] == 1){
-            numBlue++;
-        }
-        else{
-            numRed++;
-        }
-    }
-    
-}
-
-//function changeBar(){
-//    var randColor = Math.round(Math.random())+1;
-//    if(randColor == BLUE){
-//        c.fillStyle = '#8DCDEE'; 
-//    }
-//    else{
-//        c.fillStyle = '#E84343'; 
-//    }
-//    c.beginPath();
-//    c.rect(25, 100, 100, 100);
-//    c.closePath();
-//    c.fill(); 
-//}
-=======
 function getLeader(){
     var redCount=0, blueCount=0;
     for(var i=0;i<targetCount;i++){
@@ -305,4 +272,3 @@ function changeBar(){
         c.fill();
     }
 }
->>>>>>> 20df6c563ff5597e48fd36414675d590967101bd
