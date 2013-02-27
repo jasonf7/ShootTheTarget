@@ -44,9 +44,9 @@ function addTarget(){
         targetCount++;
         targetID++;
     }
-    if(targetCount >= 30){        
-        drawEndScreen();
-    }
+//    if(targetCount >= 30){        
+//        drawEndScreen();
+//    }
 }
 
 var accuracy = maxWidth/2 + 15;
@@ -154,7 +154,7 @@ function drawTargets(){
     c.beginPath();
     c.moveTo(c.width/2,c.height/2);
 //    console.log(deltaT);
-    c.arc(c.width/2,c.height/2,c.width*0.2,0,2*Math.PI*(deltaT/30)); //WHY IS IT 17?!?
+    c.arc(c.width/2,c.height/2,c.width*0.2,0,Math.round(20*Math.PI*deltaT/30)/10); //WHY IS IT 17?!?
     c.closePath();
     c.fill();
     c.fillStyle = '#c8c8c8';
