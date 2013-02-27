@@ -10,15 +10,12 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-<<<<<<< HEAD
 var BLUE = 1, RED = 2;
 
-var target = [], targetCount = 0,targetID = 0, done = false;
-=======
+
 var target = [], targetID=0, targetCount = 0, done = false, targetRate = 1,
     score=0, maxWidth=30, time=new Date().getTime();
 var BLUE = 1, RED = 2, ALL = -1; //Button types
->>>>>>> ce034b1a57f82b57330fe4a33d8d846c0de600cf
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 
 var speed=1000;//the time interval between the appereance of each target
@@ -30,13 +27,6 @@ var levelLoop = setInterval(function(){
             speed=400;
         }
         clearInterval(gameLoop);
-<<<<<<< HEAD
-        clearInterval(drawLoop);
-        clearInterval(levelLoop);
-        drawTargets();
-        done = true;
-        alert("Game Over!");
-=======
 //        if(speed === 500){ //Faster at 800, 400
 //            targetRate++;
 //            if(targetRate>2){
@@ -56,7 +46,6 @@ function addTarget(){
         target.push([intialPoint,random,5,targetID]);
         targetCount++;
         targetID++;
->>>>>>> ce034b1a57f82b57330fe4a33d8d846c0de600cf
     }
 //    if(targetCount >= 30){        
 //        drawEndScreen();
