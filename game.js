@@ -10,8 +10,6 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var target = [], targetCount = 0, done = false;
-var POINT = 0,TYPE = 1, WIDTH = 2;
 var BLUE = 1, RED = 2;
 
 var target = [], targetCount = 0,targetID = 0, done = false;
@@ -34,6 +32,7 @@ function addTarget(){
     if(targetCount == 15){
         clearInterval(gameLoop);
         clearInterval(drawLoop);
+        clearInterval(levelLoop);
         drawTargets();
         done = true;
         alert("Game Over!");
