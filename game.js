@@ -153,6 +153,7 @@ function drawTargets(){
     c.fillStyle = '#dedede';
     c.beginPath();
     c.moveTo(c.width/2,c.height/2);
+//    console.log(deltaT);
     c.arc(c.width/2,c.height/2,c.width*0.2,0,2*Math.PI*(deltaT/30)); //WHY IS IT 17?!?
     c.closePath();
     c.fill();
@@ -164,7 +165,6 @@ function drawTargets(){
     c.font = 'bold '+c.height*0.6+'px Calibri';
     c.textAlign = 'center';
     c.fillText(score,c.width/2,c.height/2+c.height*0.19);
-    console.log(time);
     c.shadowOffsetX = 0; c.shadowOffsetY=0;
     
     if(deltaT >= 30){
