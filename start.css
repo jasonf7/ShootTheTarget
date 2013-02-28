@@ -1,0 +1,27 @@
+body{
+    background:#E6E6E6;    
+}
+
+h1{
+    text-shadow: -1px -1px 1px #999799;
+    color:#c2c2c2;
+    text-align:center;
+    margin-top:10%;
+    font:bold 120px calibri,sans-serif;
+}
+
+h2{
+    text-shadow: 0 1px 1px #6ba4e0;
+    color:#a0a0a0;
+    text-align:center;
+    font:bold 40px calibri,sans-serif;
+}
+
+h3{
+   
+    color:#b3b3b3;
+    position: relative;
+    text-align:center;
+    margin-top:5%;
+    font:bold 30px calibri,sans-serif;
+}
