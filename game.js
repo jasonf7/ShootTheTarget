@@ -10,11 +10,9 @@ c.height = 0;
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas, false);
 
-var BLUE = 1, RED = 2;
-
 
 var target = [], targetID=0, targetCount = 0, done = false, targetRate = 1,
-    score=0, maxWidth=30, time=new Date().getTime();
+    score=0, maxWidth=30, time=new Date().getTime(), maxTargets=25;
 var BLUE = 1, RED = 2, ALL = -1; //Button types
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 
@@ -39,6 +37,10 @@ var levelLoop = setInterval(function(){
 * Adds a target to the array
 */
 function addTarget(){  
+    if(targetCount >= maxTargets){
+        return;    
+    }
+    
     for(var i=0; i<targetRate; i++){
         var testX = Math.random()*(c.width-30);
         var testY = Math.random()*(c.height-30);
