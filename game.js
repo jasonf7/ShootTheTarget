@@ -12,7 +12,7 @@ window.addEventListener('resize', resizeCanvas, false);
 
 
 var target = [], targetID=0, targetCount = 0, done = false, targetRate = 1,
-    score=0, maxWidth=30, time=new Date().getTime(), maxTargets=25;
+    score=0, maxWidth=30, time=new Date().getTime(), maxTargets=29;
 var BLUE = 1, RED = 2, ALL = -1; //Button types
 var POINT = 0,TYPE = 1, WIDTH = 2, ID = 3;
 
@@ -45,14 +45,14 @@ function addTarget(){
         var testX = Math.random()*(c.width-30);
         var testY = Math.random()*(c.height-30);
         var isOverlap = true;
-        console.log(targetCount);
+       // console.log(targetCount);
         if(targetCount !== 0){
             while(isOverlap){
                 var done = true;
                 for(var j=0; j<targetCount; j++){
                     if(Math.abs(testX-target[j][POINT].x)<maxWidth){
                         if(Math.abs(testY-target[j][POINT].y)<maxWidth){
-                            console.log("bad");
+//                            console.log("bad");
                             done = false;
                             testX = Math.random()*(c.width-30);
                             testY = Math.random()*(c.height-30);
@@ -62,7 +62,7 @@ function addTarget(){
                 }
                 if(done){
                     isOverlap = false;
-                    console.log("good");
+//                    console.log("good");
                 }
             }
         }
