@@ -1,17 +1,32 @@
 <html lang = "en">
     <head>
-       <meta charset = "utf-8"/> 
-        <link rel="stylesheet" href="main.css" type="text/css">
+        <title>Hello World Game</title>
+        <meta charset = "utf-8"/> 
+        <link rel="stylesheet" href="start.css" type="text/css">
         <script src="jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            var time=0;
+            function start(){
+                $("#mainH").html(""+(3-time));
+                $("#subtitle").html("Starting...");
+                $("h3").hide();
+                setInterval(function(){  
+                    time++;
+                    $("#mainH").html(""+(3-time));
+                    if(time==3){
+                        window.location = 'game.html';
+                    }                
+                },1000);
+            }
+            
+        </script>
     </head>  
     
-    <body>
-        
-        <div id="canvas-container">
-            <canvas id="canvas"></canvas>
-        </div>
-        <script src="game.js"></script>      
-        
+    <body  onclick="javascript:start();">
+        <h1 id="mainH">GG JAVASCRIPT</h1>
+        <h2 id="subtitle" >Hit the most dominant color, you have 30 seconds!</h2>
+        <h3 id="subtitle2">Click anywhere to start</h3>    
+                           
     </body>
         
 </html>
