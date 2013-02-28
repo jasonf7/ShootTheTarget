@@ -40,8 +40,31 @@ var levelLoop = setInterval(function(){
 */
 function addTarget(){  
     for(var i=0; i<targetRate; i++){
-        var intialPoint = new point(Math.random()*(c.width-30),
-            Math.random()*(c.height-30));
+        var testX = Math.random()*(c.width-30);
+        var testY = Math.random()*(c.height-30);
+        var isOverlap = true;
+        console.log(targetCount);
+        if(targetCount !== 0){
+            while(isOverlap){
+                var done = true;
+                for(var j=0; j<targetCount; j++){
+                    if(Math.abs(testX-target[j][POINT].x)<maxWidth){
+                        if(Math.abs(testY-target[j][POINT].y)<maxWidth){
+                            console.log("bad");
+                            done = false;
+                            testX = Math.random()*(c.width-30);
+                            testY = Math.random()*(c.height-30);
+                            j= targetCount-1;
+                        }
+                    }
+                }
+                if(done){
+                    isOverlap = false;
+                    console.log("good");
+                }
+            }
+        }
+        var intialPoint = new point(testX, testY);
         var random = Math.round(Math.random())+1; //Random from 1 to 2
         target.push([intialPoint,random,5,targetID]);
         targetCount++;
@@ -96,8 +119,6 @@ window.addEventListener("mousedown",getPosition,false);
 
 //var mouseLoop,
 var mouseW=50, mouseX, mouseY, drawMouse = false;
-
-var numRed = 0, numBlue = 0, goodColor=target[0][TYPE];
 
 function getPosition(event){
     //If we're interrupted, cancel old circle!
